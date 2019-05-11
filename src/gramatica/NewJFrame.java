@@ -8,6 +8,7 @@ package gramatica;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,21 @@ import javax.swing.JOptionPane;
  * @author dkram
  */
 public class NewJFrame extends javax.swing.JFrame {
+/*
+guardando aqui exemplos pra testar
+    
+S -> a|aB|b
+A -> aS|aB
+B -> b|bA       
 
+A -> A|aB
+B -> b|bB
+*/
+    
+    
+    private ArrayList ladoEsquerdoProducao = new ArrayList<>();
+    private ArrayList ladoDireitoProducao = new ArrayList<>();    
+    private ArrayList<Produtor> listaProdutores = new ArrayList<>();
     /**
      * Creates new form NewJFrame
      */
@@ -48,7 +63,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Nterminais.setText("S,A,B");
+        Nterminais.setText("A,B");
         Nterminais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NterminaisActionPerformed(evt);
@@ -78,7 +93,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         producao.setColumns(20);
         producao.setRows(5);
-        producao.setText("S -> a|aB|b\nA -> aS|aB\nB -> b|bA");
+        producao.setText("A -> a|aB\nB -> b|bB");
         jScrollPane1.setViewportView(producao);
 
         jLabel6.setText("obs: Sentença vazia: *");
@@ -162,12 +177,88 @@ public class NewJFrame extends javax.swing.JFrame {
         aDef.setText(gramatica);
         
         String producaoSep[]=producao.getText().split("\n");
+        
+        int posicaoSeparador=0;
         //para acessar cada uma das linhas da producao: producaoSep[n], sendo n a linha desejada.
-        for (String linha:producaoSep) System.out.println(linha); 
-        //System.out.println(producaoSep[1].charAt(0));
+        for (String linha:producaoSep){
+            System.out.println(linha);
+            posicaoSeparador = linha.indexOf("->");
+            ladoEsquerdoProducao.add(linha.substring(0, posicaoSeparador).trim());
+            ladoDireitoProducao.add(linha.substring(posicaoSeparador+2, linha.length()).trim());
+            
+
+        } 
+        System.out.println("ladoEsq="+ladoEsquerdoProducao);
+        System.out.println("ladoDir="+ladoDireitoProducao);        
+        
+        populaListaDeProdutores();
+        
+        System.out.println("-----EXIBINDO OS PRODUTORES E SUAS GERAÇÕES-----");
+                
+        for (Produtor prod : listaProdutores) {
+            System.out.println("Letras="+prod.getLetras());
+            for (int i = 0; i < prod.getGeradores().size(); i++) {
+                System.out.println("    Geradores="+prod.getGeradores().get(i));
+            }
+        }
+        System.out.println("------------------------------------------------");
+
+        if (validaGramatica() == false) {
+            JOptionPane.showConfirmDialog(null, "A Gramática é inválida.");
+            System.exit(0);
+        }
+        
         String teste = tipoGramatica(producaoSep);
+        
+        derivaGramatica();
+        
+        
     }//GEN-LAST:event_ExecutarActionPerformed
 
+    public boolean validaGramatica(){
+        //questão 3 do trabalho pede para validar a gramática..
+        //criar alguma validação importante aqui
+        
+        return true;
+    }
+    
+    public void populaListaDeProdutores(){
+        for (int i = 0; i < ladoEsquerdoProducao.size(); i++) {
+            //cria produtor e coloca as Letras nele (Letras = lado esquerdo)
+            Produtor produtor = new Produtor();
+            produtor.setLetras(ladoEsquerdoProducao.get(i).toString());
+            
+            //separa os geradores do lado esquerdo           
+            String[] ladoDireitoSeparado = ladoDireitoProducao.get(i).toString().split("\\|");
+            
+            //insere na lista do produtor
+            for (int j = 0; j < ladoDireitoSeparado.length; j++) {
+                produtor.getGeradores().add(ladoDireitoSeparado[j]);                
+            }
+            
+            listaProdutores.add(produtor);
+        }       
+    }
+    
+    public String derivaGramatica(){
+        int nivelJaDerivado = 0; //contador para derivar certa quantidade de vezes só
+        
+        Produtor produtorAtual = new Produtor();
+        String geradorAtual=""; //gerador do lado direito
+        for (int i = 0; i < listaProdutores.size(); i++) {
+            produtorAtual = listaProdutores.get(i);
+            
+            //percorre os geradores do produtor
+            for (int j = 0; j < produtorAtual.getGeradores().size(); j++) {
+                //lógica para achar algum terminal ou então não terminal e mudar de produtor (que contenha aquele não terminal)
+            }
+            
+            nivelJaDerivado++;
+        }
+        
+        
+        return "";
+    }
     
     public String tipoGramatica(String[] producaoSep){
         // fazer o algoritmo que vai especificar a qual gramatica pertence a producao
@@ -181,8 +272,8 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         return Nterminais.getText().toUpperCase();
     }
-    
-        public String pegarTerminais(){
+
+    public String pegarTerminais(){
         if(terminais.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Informe os  terminais! Ex: a,b");
             return null;
