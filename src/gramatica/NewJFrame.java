@@ -251,9 +251,7 @@ B -> b|bB
         String g = "";
         String terminal = "";
         String naoTerminal = "";
-        /*for (int i = 0; i < listaProdutores.size(); i++) {
-            produtorAtual = listaProdutores.get(i);
-        }*/
+
         produtorAtual = listaProdutores.get(0);
         //System.out.println(produtorAtual.getLetras());
         
@@ -262,6 +260,10 @@ B -> b|bB
             int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
             g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
             System.out.println(g);
+            
+            //ATENÇÃO: Se na gramatica tiver um NT+T (ex: Bb), entao deve-se criar mais um 'if' verificando se
+            //o NT está no começo ou no fim e adicionar -> geradorAtual = geradorAtual.concat(g + terminal + " -> ")
+            //Se o NT estiver no meio (aBb), eu não sei kkkkkkk
             if(terminal.isEmpty()){
                 geradorAtual = geradorAtual.concat(g + " -> ");
             }else{
