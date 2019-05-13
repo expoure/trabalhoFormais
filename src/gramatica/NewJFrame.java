@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -243,21 +244,63 @@ B -> b|bB
     public String derivaGramatica(){
         int nivelJaDerivado = 0; //contador para derivar certa quantidade de vezes só
         
+        boolean derivar = true;
+        Random r = new Random();
         Produtor produtorAtual = new Produtor();
-        String geradorAtual=""; //gerador do lado direito
-        for (int i = 0; i < listaProdutores.size(); i++) {
+        String geradorAtual= listaProdutores.get(0).getLetras() + " -> "; //gerador do lado direito
+        String g = "";
+        String anterior = "";
+        String isUp = "";
+        /*for (int i = 0; i < listaProdutores.size(); i++) {
             produtorAtual = listaProdutores.get(i);
+        }*/
+        produtorAtual = listaProdutores.get(0);
+        //System.out.println(produtorAtual.getLetras());
+        
+        while(derivar){
             
-            //percorre os geradores do produtor
-            for (int j = 0; j < produtorAtual.getGeradores().size(); j++) {
-                //lógica para achar algum terminal ou então não terminal e mudar de produtor (que contenha aquele não terminal)
+            int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
+            g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
+            System.out.println(g);
+            if(anterior.isEmpty()){
+                geradorAtual = geradorAtual.concat(g + " -> ");
+            }else{
+                geradorAtual = geradorAtual.concat(anterior + g + " -> ");
             }
             
-            nivelJaDerivado++;
+            //se o gerador aleatorio for minusculo, a derivação termina
+            //se contiver maiuscula, percorre a string e retorna a letra maiucula
+            if(g.toLowerCase().equals(g)){             
+                System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
+                derivar = false;
+            }else{
+                for(int y = 0; y < g.length(); y++){
+                    if(Character.isUpperCase(g.charAt(y))){
+                       char w = g.charAt(y);
+                       isUp = Character.toString(w);
+                    }
+                    if(Character.isLowerCase(g.charAt(y))){
+                       char w = g.charAt(y);
+                       anterior = anterior.concat(Character.toString(w));
+                    }
+                    //System.out.println(isUp);
+                    produtorAtual = listaProdutores.get(indiceNT(isUp));
+                }
+            }
+                    
         }
         
-        
         return "";
+    }
+    
+    public int indiceNT(String isUp){
+        int i = 0;
+        for (i = 0; i < listaProdutores.size()-1; i++) {
+            if(isUp.equals(listaProdutores.get(i).getLetras())){
+                return i;
+            }
+        }
+        return i;
     }
     
     public String tipoGramatica(String[] producaoSep){

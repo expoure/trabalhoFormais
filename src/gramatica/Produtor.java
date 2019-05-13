@@ -34,6 +34,8 @@ public class Produtor {
     public void setGeradores(ArrayList geradores) {
         this.geradores = geradores;
     }
+
+
     
     
     
