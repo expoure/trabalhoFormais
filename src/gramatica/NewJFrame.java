@@ -249,8 +249,8 @@ B -> b|bB
         Produtor produtorAtual = new Produtor();
         String geradorAtual= listaProdutores.get(0).getLetras() + " -> "; //gerador do lado direito
         String g = "";
-        String anterior = "";
-        String isUp = "";
+        String terminal = "";
+        String naoTerminal = "";
         /*for (int i = 0; i < listaProdutores.size(); i++) {
             produtorAtual = listaProdutores.get(i);
         }*/
@@ -262,10 +262,10 @@ B -> b|bB
             int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
             g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
             System.out.println(g);
-            if(anterior.isEmpty()){
+            if(terminal.isEmpty()){
                 geradorAtual = geradorAtual.concat(g + " -> ");
             }else{
-                geradorAtual = geradorAtual.concat(anterior + g + " -> ");
+                geradorAtual = geradorAtual.concat(terminal + g + " -> ");
             }
             
             //se o gerador aleatorio for minusculo, a derivação termina
@@ -277,14 +277,14 @@ B -> b|bB
                 for(int y = 0; y < g.length(); y++){
                     if(Character.isUpperCase(g.charAt(y))){
                        char w = g.charAt(y);
-                       isUp = Character.toString(w);
+                       naoTerminal = Character.toString(w);
                     }
                     if(Character.isLowerCase(g.charAt(y))){
                        char w = g.charAt(y);
-                       anterior = anterior.concat(Character.toString(w));
+                       terminal = terminal.concat(Character.toString(w));
                     }
                     //System.out.println(isUp);
-                    produtorAtual = listaProdutores.get(indiceNT(isUp));
+                    produtorAtual = listaProdutores.get(indiceNT(naoTerminal));
                 }
             }
                     
