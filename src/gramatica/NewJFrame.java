@@ -209,7 +209,7 @@ B -> b|bB
             System.exit(0);
         }
         
-        String teste = tipoGramatica(producaoSep);
+        String teste = tipoGramatica();
         
         derivaGramatica();
         
@@ -305,8 +305,33 @@ B -> b|bB
         return i;
     }
     
-    public String tipoGramatica(String[] producaoSep){
-        // fazer o algoritmo que vai especificar a qual gramatica pertence a producao
+    public String tipoGramatica(){
+        int gr = 0;
+        int glc = 0;
+        int gsc = 0;
+        int gi = 0;
+
+        for(int i = 0; i < listaProdutores.size(); i++){ //duas ultimas gramaticas
+            if (listaProdutores.get(i).getLetras().length() != 1) { 
+                break;
+            }else{
+                for(int j = 0; j < listaProdutores.get(i).getGeradores().size(); j++){
+                    if (listaProdutores.get(i).getGeradores().get(j).toString().length() > 2) {
+                        glc++;
+                    }else{
+                        gr++;
+                    }
+                }
+            }
+        }
+        //fazer os dois primeiros casos
+        //--------------------------//
+        if(glc > 0){
+            System.out.println("gramática livre de contexto");
+        }else{
+            System.out.println("gramática regular");
+        }
+        //System.out.println(Math.max(gr, glc));
         return "";
     }
     
