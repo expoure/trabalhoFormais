@@ -310,22 +310,40 @@ B -> b|bB
         int glc = 0;
         int gsc = 0;
         int gi = 0;
-
-        for(int i = 0; i < listaProdutores.size(); i++){ //duas ultimas gramaticas
+        
+        //o primeiro for verifica se é gramática do tipo 3 ou do tipo 2
+        for(int i = 0; i < listaProdutores.size(); i++){ 
             if (listaProdutores.get(i).getLetras().length() != 1) { 
                 break;
             }else{
                 for(int j = 0; j < listaProdutores.get(i).getGeradores().size(); j++){
-                    if (listaProdutores.get(i).getGeradores().get(j).toString().length() > 2) {
-                        glc++;
-                    }else{
-                        gr++;
+                    int tam = listaProdutores.get(i).getGeradores().get(j).toString().length();
+                    if (tam <= 2) { //verificar se é gramatica regular
+                        if(tam == 1 && Character.isLowerCase(listaProdutores.get(i).getGeradores().get(j).toString().charAt(0))){
+                            gr++;
+                        }else{
+                            if(Character.isLowerCase(listaProdutores.get(i).getGeradores().get(j).toString().charAt(0)) && 
+                                Character.isUpperCase(listaProdutores.get(i).getGeradores().get(j).toString().charAt(1))){
+                                gr++;
+                            }else{//se nenhuma condição para ser gr é satisfeita, então é glc
+                                glc++;
+                            }
+                        }
+
+                    }else{ //verificar se é livre de contexto (implementar identificação de simbolo vazio)
+                        
                     }
                 }
             }
         }
-        //fazer os dois primeiros casos
-        //--------------------------//
+        
+        /*fazer identificação da gramática do tipo 1
+        --------------------------
+        */
+        
+        
+        /*--------------------
+        Tornar mais coeso os identificadores de gramática abaixo        */      
         if(glc > 0){
             System.out.println("gramática livre de contexto");
         }else{
