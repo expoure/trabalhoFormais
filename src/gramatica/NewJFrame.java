@@ -306,14 +306,25 @@ B -> b|bB
     }
     
     public String tipoGramatica(){
+        //dar um jeito de zerar esses valores a cada clique no botao executar
         int gr = 0;
         int glc = 0;
         int gsc = 0;
         int gi = 0;
+        int vazio = 0;
+        int comp = 0;
         
-        //o primeiro for verifica se é gramática do tipo 3 ou do tipo 2
+        
         for(int i = 0; i < listaProdutores.size(); i++){ 
-            if (listaProdutores.get(i).getLetras().length() != 1) { 
+            if (listaProdutores.get(i).getLetras().length() > 1) {
+                comp = listaProdutores.get(i).getLetras().length();
+                for(int j = 0; j < listaProdutores.get(i).getGeradores().size(); j++){
+                    if(comp <= listaProdutores.get(i).getGeradores().get(j).toString().length() ){
+                        gsc++;
+                    }else{
+                        gi++;
+                    }
+                }
                 break;
             }else{
                 for(int j = 0; j < listaProdutores.get(i).getGeradores().size(); j++){
@@ -326,29 +337,40 @@ B -> b|bB
                                 Character.isUpperCase(listaProdutores.get(i).getGeradores().get(j).toString().charAt(1))){
                                 gr++;
                             }else{//se nenhuma condição para ser gr é satisfeita, então é glc
-                                glc++;
+                                if(listaProdutores.get(i).getGeradores().get(j).toString().equals("*")){
+                                    vazio++;
+                                }else{
+                                    glc++;
+                                }
+                                
                             }
                         }
 
-                    }else{ //verificar se é livre de contexto (implementar identificação de simbolo vazio)
-                        
+                    }else{ 
+                            glc++;
                     }
                 }
             }
         }
         
-        /*fazer identificação da gramática do tipo 1
-        --------------------------
-        */
-        
-        
+
         /*--------------------
         Tornar mais coeso os identificadores de gramática abaixo        */      
-        if(glc > 0){
-            System.out.println("gramática livre de contexto");
+        if(glc > 0 && vazio == 0 && comp == 0){
+            System.out.println("Gramática livre de contexto");
         }else{
-            System.out.println("gramática regular");
+            if(gr > 0 && comp == 0){
+                System.out.println("Gramática regular");
+            }
         }
+        if(gi > 0){
+            System.out.println("Gramática irrestrita");                    
+        }else{
+            if(gsc > 0){
+                System.out.println("Gramática sensível ao contexto"); 
+            }
+        }
+        
         //System.out.println(Math.max(gr, glc));
         return "";
     }
