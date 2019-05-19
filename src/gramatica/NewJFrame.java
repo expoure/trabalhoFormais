@@ -213,7 +213,7 @@ B -> b|bB
         
         derivaGramatica();
         
-        
+        geraTabelaAutomatoFinito();
     }//GEN-LAST:event_ExecutarActionPerformed
 
     public boolean validaGramatica(){
@@ -390,6 +390,108 @@ B -> b|bB
         }
         return terminais.getText().toLowerCase();
     }
+    
+    public void geraTabelaAutomatoFinito(){
+        System.out.println("--------------------QUESTÃO 6----------------------------");
+        System.out.println("Reconhecer a entrada através de um autômato finito.");
+        String vetorTerminais[] = terminais.getText().split(",");
+        String vetorNaoTerminais[] = Nterminais.getText().split(",");        
+        String matrizAutomato[][] = new String[vetorNaoTerminais.length+1][vetorTerminais.length+1];
+                
+        for (int i = 0; i < matrizAutomato.length; i++) {
+            for (int j = 0; j < matrizAutomato.length; j++) {
+                matrizAutomato[i][j] = "";
+            }
+        }        
+        //popula as linhas, coluna ZERO com os NÃO TERMINAIS
+        int indiceVetores=0;
+        for (int i = 1; i < matrizAutomato.length; i++) {
+            matrizAutomato[i][0] = vetorNaoTerminais[indiceVetores];            
+            indiceVetores++;
+        }
+        indiceVetores=0;
+        //popula as colunas, linha ZERO com os TERMINAIS
+        for (int i = 1; i < matrizAutomato.length; i++) {
+            matrizAutomato[0][i] = vetorTerminais[indiceVetores];            
+            indiceVetores++;
+        }     
+        
+        String g="";
+        String naoTerminal="", terminal="";
+        int indNT=0, indT=0;
+        
+        for (Produtor prod : listaProdutores) {
+            for (int i = 0; i < prod.getGeradores().size(); i++) {
+                g = prod.getGeradores().get(i).toString();
+                if(!g.toLowerCase().equals(g)){ //caso não for terminal, percorre o NÃO TERMINAL e separa os caracteres terminais dos não terminais
+                    terminal="";
+                    naoTerminal="";
+                    for(int y = 0; y < g.length(); y++){
+                        if(Character.isUpperCase(g.charAt(y))){
+                           char w = g.charAt(y);
+                           naoTerminal = Character.toString(w);
+                        }
+                        if(Character.isLowerCase(g.charAt(y))){
+                           char w = g.charAt(y);
+                           terminal = terminal.concat(Character.toString(w)); // e para no caso de ter mais de 1 terminal separar:   a|b|c ????
+                        }
+                    }
+                    
+                    //String terminais[] = terminal.split("|"); //possibilidade de ser a|b|c      em:    A-> a|abcB
+                    //for (int j = 0; j < terminais.length; j++) {
+                        //inserindo na tabela
+                        indNT = indiceNT_NaMatriz(prod.getLetras(), matrizAutomato);
+                        indT  = indiceTerminal_NaMatriz(terminal, matrizAutomato);                        
+                        matrizAutomato[indNT][indT] = naoTerminal;
+                    //}                    
+                }
+            }
+        }
+        
+        System.out.println("TABELA GERADA");
+                
+        for (int i = 0; i < matrizAutomato.length; i++) {            
+            for (int j = 0; j < matrizAutomato.length; j++) {
+                if (j==0){
+                    if (matrizAutomato[i][j].equals("")){
+                        System.out.print("| - |");
+                    }else{
+                        System.out.print("| "+matrizAutomato[i][j]+" |");    
+                    }                    
+                }else{
+                    if (matrizAutomato[i][j].equals("")){
+                        System.out.print(" - |");
+                    }else{
+                        System.out.print(" "+matrizAutomato[i][j]+" |");    
+                    }                    
+                }
+            }
+            System.out.println("");                                            
+        }        
+        System.out.println("------------------------------------------------");
+    }
+    
+    public int indiceNT_NaMatriz(String texto, String matrizAutomato[][]){
+        int indicePadrao = 0;
+        //procura nas linhas da primeira coluna
+        for (int i = 0; i < matrizAutomato.length; i++) {
+            if (matrizAutomato[i][0].equals(texto)){
+                return i;                
+            }
+        }
+        return indicePadrao;
+    }
+    
+    public int indiceTerminal_NaMatriz(String texto, String matrizAutomato[][]){
+        int indicePadrao = 0;
+        //procura nas colunas da primeira linha
+        for (int i = 0; i < matrizAutomato.length; i++) {
+            if (matrizAutomato[0][i].equals(texto)){
+                return i;                
+            }
+        }
+        return indicePadrao;
+    }    
     
     /**
      * @param args the command line arguments
