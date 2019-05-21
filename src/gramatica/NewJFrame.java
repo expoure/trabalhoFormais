@@ -197,6 +197,9 @@ B -> b|bB
     }//GEN-LAST:event_NterminaisActionPerformed
 
     private void ExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExecutarActionPerformed
+        ladoDireitoProducao.clear();
+        ladoEsquerdoProducao.clear();
+        listaProdutores.clear();
         jTextArea1.setText("");
         String gramatica = "G = ({"+ pegarNterminais() + "}, {" + pegarTerminais() + "}, P, S)";
         aDef.setText(gramatica);
