@@ -61,6 +61,8 @@ B -> b|bB
         jScrollPane1 = new javax.swing.JScrollPane();
         producao = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,40 +101,55 @@ B -> b|bB
 
         jLabel6.setText("obs: Sentença vazia: *");
 
+        jLabel7.setText("Derivação:");
+
+        jLabel8.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(aDef))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(aDef))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addGap(59, 59, 59))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Nterminais, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 306, Short.MAX_VALUE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(jLabel4)
+                                                    .addComponent(jLabel5))
+                                                .addGap(59, 59, 59))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addGap(18, 18, 18)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Nterminais, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 306, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(176, 176, 176)
+                                .addComponent(Executar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel7)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(Executar)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,7 +180,11 @@ B -> b|bB
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(aDef))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,22 +226,27 @@ B -> b|bB
         System.out.println("------------------------------------------------");
 
         if (validaGramatica() == false) {
-            JOptionPane.showConfirmDialog(null, "A Gramática é inválida.");
+            JOptionPane.showMessageDialog(null, "A Gramática é inválida.","Erro", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
+        }else{
+            String resposta = tipoGramatica();
+            JOptionPane.showMessageDialog(null, resposta,"Tipo da Gramática", JOptionPane.INFORMATION_MESSAGE);
+            derivaGramatica();
         }
-        
-        String teste = tipoGramatica();
-        
+               
         derivaGramatica();
         
         geraTabelaAutomatoFinito();
     }//GEN-LAST:event_ExecutarActionPerformed
 
     public boolean validaGramatica(){
-        //questão 3 do trabalho pede para validar a gramática..
-        //criar alguma validação importante aqui
+        String resposta  = tipoGramatica();
         
-        return true;
+        if(resposta == ""){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     public void populaListaDeProdutores(){
@@ -274,6 +300,7 @@ B -> b|bB
             //se contiver maiuscula, percorre a string e retorna a letra maiucula
             if(g.toLowerCase().equals(g)){             
                 System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
+                jLabel8.setText(geradorAtual.toString());
                 derivar = false;
             }else{
                 for(int y = 0; y < g.length(); y++){
@@ -357,22 +384,24 @@ B -> b|bB
         /*--------------------
         Tornar mais coeso os identificadores de gramática abaixo        */      
         if(glc > 0 && vazio == 0 && comp == 0){
-            System.out.println("Gramática livre de contexto");
+            return ("Gramática livre de contexto");
         }else{
             if(gr > 0 && comp == 0){
-                System.out.println("Gramática regular");
-            }
-        }
-        if(gi > 0){
-            System.out.println("Gramática irrestrita");                    
-        }else{
-            if(gsc > 0){
-                System.out.println("Gramática sensível ao contexto"); 
+                return ("Gramática regular");
+            }else{
+                if(gi > 0){
+                    return ("Gramática irrestrita");                    
+                }else{
+                    if(gsc > 0){
+                        return ("Gramática sensível ao contexto"); 
+                    }else{
+                       return (""); 
+                    }
+                }
             }
         }
         
         //System.out.println(Math.max(gr, glc));
-        return "";
     }
     
     public String pegarNterminais(){
@@ -538,6 +567,8 @@ B -> b|bB
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea producao;
     private javax.swing.JTextField terminais;
