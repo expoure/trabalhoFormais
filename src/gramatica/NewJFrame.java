@@ -148,7 +148,7 @@ B -> b|bB
                                 .addGap(19, 19, 19)
                                 .addComponent(jLabel8)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -184,9 +184,10 @@ B -> b|bB
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
+                        .addComponent(jLabel8)
+                        .addGap(0, 126, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
 
         pack();
@@ -499,7 +500,7 @@ B -> b|bB
                     if (j==0){
                         if (matrizAutomato[i][j].equals("")){
                             System.out.print("| - |");
-                            jTextArea1.append("| - |");
+                            jTextArea1.append("|  - |");
                         }else{
                             System.out.print("| "+matrizAutomato[i][j]+" |"); 
                             jTextArea1.append("| "+matrizAutomato[i][j]+" |");
@@ -507,7 +508,7 @@ B -> b|bB
                     }else{
                         if (matrizAutomato[i][j].equals("")){
                             System.out.print(" - |");
-                            jTextArea1.append(" - |");
+                            jTextArea1.append("  - |");
                         }else{
                             System.out.print(" "+matrizAutomato[i][j]+" |"); 
                             jTextArea1.append(" "+matrizAutomato[i][j]+" |");
