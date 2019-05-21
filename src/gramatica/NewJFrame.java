@@ -231,10 +231,10 @@ B -> b|bB
         }else{
             String resposta = tipoGramatica();
             JOptionPane.showMessageDialog(null, resposta,"Tipo da Gramática", JOptionPane.INFORMATION_MESSAGE);
-            derivaGramatica();
+            derivaGramatica(resposta);
         }
                
-        derivaGramatica();
+        //derivaGramatica(resposta);
         
         geraTabelaAutomatoFinito();
     }//GEN-LAST:event_ExecutarActionPerformed
@@ -267,7 +267,7 @@ B -> b|bB
         }       
     }
     
-    public String derivaGramatica(){
+    public String derivaGramatica(String resposta){
         int nivelJaDerivado = 0; //contador para derivar certa quantidade de vezes só
         
         boolean derivar = true;
@@ -281,42 +281,43 @@ B -> b|bB
         produtorAtual = listaProdutores.get(0);
         //System.out.println(produtorAtual.getLetras());
         
-        while(derivar){
+        if(resposta.equals("Gramática regular") || resposta.equals("Gramática livre de contexto")){
+            while(derivar){
             
-            int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
-            g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
-            System.out.println(g);
-            
-            //ATENÇÃO: Se na gramatica tiver um NT+T (ex: Bb), entao deve-se criar mais um 'if' verificando se
-            //o NT está no começo ou no fim e adicionar -> geradorAtual = geradorAtual.concat(g + terminal + " -> ")
-            //Se o NT estiver no meio (aBb), eu não sei kkkkkkk
-            if(terminal.isEmpty()){
-                geradorAtual = geradorAtual.concat(g + " -> ");
-            }else{
-                geradorAtual = geradorAtual.concat(terminal + g + " -> ");
-            }
-            
-            //se o gerador aleatorio for minusculo, a derivação termina
-            //se contiver maiuscula, percorre a string e retorna a letra maiucula
-            if(g.toLowerCase().equals(g)){             
-                System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
-                jLabel8.setText(geradorAtual.toString());
-                derivar = false;
-            }else{
-                for(int y = 0; y < g.length(); y++){
-                    if(Character.isUpperCase(g.charAt(y))){
-                       char w = g.charAt(y);
-                       naoTerminal = Character.toString(w);
-                    }
-                    if(Character.isLowerCase(g.charAt(y))){
-                       char w = g.charAt(y);
-                       terminal = terminal.concat(Character.toString(w));
-                    }
-                    //System.out.println(isUp);
-                    produtorAtual = listaProdutores.get(indiceNT(naoTerminal));
+                int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
+                g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
+                System.out.println(g);
+
+                if(terminal.isEmpty()){
+                    geradorAtual = geradorAtual.concat(g + " -> ");
+                }else{
+                    geradorAtual = geradorAtual.concat(terminal + g + " -> ");
                 }
-            }
+
+                //se o gerador aleatorio for minusculo, a derivação termina
+                //se contiver maiuscula, percorre a string e retorna a letra maiucula
+                if(g.toLowerCase().equals(g)){             
+                    System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
+                    jLabel8.setText(geradorAtual.toString());
+                    derivar = false;
+                }else{
+                    for(int y = 0; y < g.length(); y++){
+                        if(Character.isUpperCase(g.charAt(y))){
+                           char w = g.charAt(y);
+                           naoTerminal = Character.toString(w);
+                        }
+                        if(Character.isLowerCase(g.charAt(y))){
+                           char w = g.charAt(y);
+                           terminal = terminal.concat(Character.toString(w));
+                        }
+                        //System.out.println(isUp);
+                        produtorAtual = listaProdutores.get(indiceNT(naoTerminal));
+                    }
+                }
                     
+            }
+        }else{
+            //derivar os dois primeiros tipos
         }
         
         return "";
