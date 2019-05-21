@@ -63,6 +63,8 @@ B -> b|bB
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,52 +107,49 @@ B -> b|bB
 
         jLabel8.setText("...");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(aDef))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(aDef))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(jLabel4)
-                                                    .addComponent(jLabel5))
-                                                .addGap(59, 59, 59))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addGap(18, 18, 18)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Nterminais, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 306, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(59, 59, 59))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Nterminais, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(176, 176, 176)
+                                .addGap(166, 166, 166)
                                 .addComponent(Executar))
+                            .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel8)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,33 +157,36 @@ B -> b|bB
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(Nterminais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(Nterminais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Executar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(aDef))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(149, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Executar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(aDef))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,8 +197,10 @@ B -> b|bB
     }//GEN-LAST:event_NterminaisActionPerformed
 
     private void ExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExecutarActionPerformed
+        jTextArea1.setText("");
         String gramatica = "G = ({"+ pegarNterminais() + "}, {" + pegarTerminais() + "}, P, S)";
         aDef.setText(gramatica);
+        jTextArea1.append("Questão 2: visualização da gramática formatada: \n" + gramatica + "\n\n");
         
         String producaoSep[]=producao.getText().split("\n");
         
@@ -229,14 +233,17 @@ B -> b|bB
             JOptionPane.showMessageDialog(null, "A Gramática é inválida.","Erro", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }else{
+            jTextArea1.append("Questão 3: Validação da gramática: OK \n\n");
             String resposta = tipoGramatica();
-            JOptionPane.showMessageDialog(null, resposta,"Tipo da Gramática", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, resposta,"Tipo da Gramática", JOptionPane.INFORMATION_MESSAGE);
+            jTextArea1.append("Questão 4: Tipo da gramática: " + resposta + "\n\n");
             derivaGramatica(resposta);
+            geraTabelaAutomatoFinito(resposta);
         }
                
         //derivaGramatica(resposta);
         
-        geraTabelaAutomatoFinito();
+        
     }//GEN-LAST:event_ExecutarActionPerformed
 
     public boolean validaGramatica(){
@@ -299,6 +306,7 @@ B -> b|bB
                 if(g.toLowerCase().equals(g)){             
                     System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
                     jLabel8.setText(geradorAtual.toString());
+                    jTextArea1.append("Questão 5: Derivação: " + geradorAtual.toString());
                     derivar = false;
                 }else{
                     for(int y = 0; y < g.length(); y++){
@@ -421,84 +429,96 @@ B -> b|bB
         return terminais.getText().toLowerCase();
     }
     
-    public void geraTabelaAutomatoFinito(){
-        System.out.println("--------------------QUESTÃO 6----------------------------");
-        System.out.println("Reconhecer a entrada através de um autômato finito.");
-        String vetorTerminais[] = terminais.getText().split(",");
-        String vetorNaoTerminais[] = Nterminais.getText().split(",");        
-        String matrizAutomato[][] = new String[vetorNaoTerminais.length+1][vetorTerminais.length+1];
-                
-        for (int i = 0; i < matrizAutomato.length; i++) {
-            for (int j = 0; j < matrizAutomato.length; j++) {
-                matrizAutomato[i][j] = "";
+    public void geraTabelaAutomatoFinito(String resposta){
+        
+        if(resposta.equals("Gramática regular")){
+            System.out.println("--------------------QUESTÃO 6----------------------------");
+            System.out.println("Reconhecer a entrada através de um autômato finito.");
+            String vetorTerminais[] = terminais.getText().split(",");
+            String vetorNaoTerminais[] = Nterminais.getText().split(",");        
+            String matrizAutomato[][] = new String[vetorNaoTerminais.length+1][vetorTerminais.length+1];
+            jTextArea1.append("\n\nQuestão 6: Reconhecer por autômato finito:\n");
+
+            for (int i = 0; i < matrizAutomato.length; i++) {
+                for (int j = 0; j < matrizAutomato.length; j++) {
+                    matrizAutomato[i][j] = "";
+                }
+            }        
+            //popula as linhas, coluna ZERO com os NÃO TERMINAIS
+            int indiceVetores=0;
+            for (int i = 1; i < matrizAutomato.length; i++) {
+                matrizAutomato[i][0] = vetorNaoTerminais[indiceVetores];            
+                indiceVetores++;
             }
-        }        
-        //popula as linhas, coluna ZERO com os NÃO TERMINAIS
-        int indiceVetores=0;
-        for (int i = 1; i < matrizAutomato.length; i++) {
-            matrizAutomato[i][0] = vetorNaoTerminais[indiceVetores];            
-            indiceVetores++;
-        }
-        indiceVetores=0;
-        //popula as colunas, linha ZERO com os TERMINAIS
-        for (int i = 1; i < matrizAutomato.length; i++) {
-            matrizAutomato[0][i] = vetorTerminais[indiceVetores];            
-            indiceVetores++;
-        }     
-        
-        String g="";
-        String naoTerminal="", terminal="";
-        int indNT=0, indT=0;
-        
-        for (Produtor prod : listaProdutores) {
-            for (int i = 0; i < prod.getGeradores().size(); i++) {
-                g = prod.getGeradores().get(i).toString();
-                if(!g.toLowerCase().equals(g)){ //caso não for terminal, percorre o NÃO TERMINAL e separa os caracteres terminais dos não terminais
-                    terminal="";
-                    naoTerminal="";
-                    for(int y = 0; y < g.length(); y++){
-                        if(Character.isUpperCase(g.charAt(y))){
-                           char w = g.charAt(y);
-                           naoTerminal = Character.toString(w);
+            indiceVetores=0;
+            //popula as colunas, linha ZERO com os TERMINAIS
+            for (int i = 1; i < matrizAutomato.length; i++) {
+                matrizAutomato[0][i] = vetorTerminais[indiceVetores];            
+                indiceVetores++;
+            }     
+
+            String g="";
+            String naoTerminal="", terminal="";
+            int indNT=0, indT=0;
+
+            for (Produtor prod : listaProdutores) {
+                for (int i = 0; i < prod.getGeradores().size(); i++) {
+                    g = prod.getGeradores().get(i).toString();
+                    if(!g.toLowerCase().equals(g)){ //caso não for terminal, percorre o NÃO TERMINAL e separa os caracteres terminais dos não terminais
+                        terminal="";
+                        naoTerminal="";
+                        for(int y = 0; y < g.length(); y++){
+                            if(Character.isUpperCase(g.charAt(y))){
+                               char w = g.charAt(y);
+                               naoTerminal = Character.toString(w);
+                            }
+                            if(Character.isLowerCase(g.charAt(y))){
+                               char w = g.charAt(y);
+                               terminal = terminal.concat(Character.toString(w)); // e para no caso de ter mais de 1 terminal separar:   a|b|c ????
+                            }
                         }
-                        if(Character.isLowerCase(g.charAt(y))){
-                           char w = g.charAt(y);
-                           terminal = terminal.concat(Character.toString(w)); // e para no caso de ter mais de 1 terminal separar:   a|b|c ????
-                        }
+
+                        //String terminais[] = terminal.split("|"); //possibilidade de ser a|b|c      em:    A-> a|abcB
+                        //for (int j = 0; j < terminais.length; j++) {
+                            //inserindo na tabela
+                            indNT = indiceNT_NaMatriz(prod.getLetras(), matrizAutomato);
+                            indT  = indiceTerminal_NaMatriz(terminal, matrizAutomato);                        
+                            matrizAutomato[indNT][indT] = naoTerminal;
+                        //}                    
                     }
-                    
-                    //String terminais[] = terminal.split("|"); //possibilidade de ser a|b|c      em:    A-> a|abcB
-                    //for (int j = 0; j < terminais.length; j++) {
-                        //inserindo na tabela
-                        indNT = indiceNT_NaMatriz(prod.getLetras(), matrizAutomato);
-                        indT  = indiceTerminal_NaMatriz(terminal, matrizAutomato);                        
-                        matrizAutomato[indNT][indT] = naoTerminal;
-                    //}                    
                 }
             }
+            jTextArea1.append("\nTabela gerada:\n");
+            System.out.println("TABELA GERADA");
+
+            for (int i = 0; i < matrizAutomato.length; i++) {            
+                for (int j = 0; j < matrizAutomato.length; j++) {
+                    if (j==0){
+                        if (matrizAutomato[i][j].equals("")){
+                            System.out.print("| - |");
+                            jTextArea1.append("| - |");
+                        }else{
+                            System.out.print("| "+matrizAutomato[i][j]+" |"); 
+                            jTextArea1.append("| "+matrizAutomato[i][j]+" |");
+                        }                    
+                    }else{
+                        if (matrizAutomato[i][j].equals("")){
+                            System.out.print(" - |");
+                            jTextArea1.append(" - |");
+                        }else{
+                            System.out.print(" "+matrizAutomato[i][j]+" |"); 
+                            jTextArea1.append(" "+matrizAutomato[i][j]+" |");
+                        }                    
+                    }
+                }
+                jTextArea1.append("\n");
+                System.out.println("");                                            
+            }        
+            System.out.println("------------------------------------------------");
+            }else{
+                jTextArea1.append("\n\nQuestão 6: Reconhecer por autômato finito:\n");
+                jTextArea1.append("\n\nQuestão 6: Gramática não é regular (tipo 3)");
         }
-        
-        System.out.println("TABELA GERADA");
-                
-        for (int i = 0; i < matrizAutomato.length; i++) {            
-            for (int j = 0; j < matrizAutomato.length; j++) {
-                if (j==0){
-                    if (matrizAutomato[i][j].equals("")){
-                        System.out.print("| - |");
-                    }else{
-                        System.out.print("| "+matrizAutomato[i][j]+" |");    
-                    }                    
-                }else{
-                    if (matrizAutomato[i][j].equals("")){
-                        System.out.print(" - |");
-                    }else{
-                        System.out.print(" "+matrizAutomato[i][j]+" |");    
-                    }                    
-                }
-            }
-            System.out.println("");                                            
-        }        
-        System.out.println("------------------------------------------------");
     }
     
     public int indiceNT_NaMatriz(String texto, String matrizAutomato[][]){
@@ -571,6 +591,8 @@ B -> b|bB
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea producao;
     private javax.swing.JTextField terminais;
     // End of variables declaration//GEN-END:variables
