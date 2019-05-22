@@ -65,6 +65,8 @@ B -> b|bB
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        derivacoes = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,6 +113,15 @@ B -> b|bB
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
+        jLabel9.setText("Derivações");
+
+        derivacoes.setText("0");
+        derivacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                derivacoesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +152,10 @@ B -> b|bB
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(terminais, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(166, 166, 166)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(derivacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
                                 .addComponent(Executar))
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
@@ -176,7 +190,10 @@ B -> b|bB
                                 .addGap(10, 10, 10)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Executar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Executar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(derivacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -240,8 +257,11 @@ B -> b|bB
             jTextArea1.append("Questão 3: Validação da gramática: OK \n\n");
             String resposta = tipoGramatica();
             //JOptionPane.showMessageDialog(null, resposta,"Tipo da Gramática", JOptionPane.INFORMATION_MESSAGE);
-            jTextArea1.append("Questão 4: Tipo da gramática: " + resposta + "\n\n");
-            derivaGramatica(resposta);
+            jTextArea1.append("Questão 4: Tipo da gramática: " + resposta + "\n");
+            for(int k = 0; k <= Integer.parseInt(derivacoes.getText()); k++){
+                derivaGramatica(resposta);
+            }
+            
             geraTabelaAutomatoFinito(resposta);
         }
                
@@ -249,6 +269,10 @@ B -> b|bB
         
         
     }//GEN-LAST:event_ExecutarActionPerformed
+
+    private void derivacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivacoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_derivacoesActionPerformed
 
     public boolean validaGramatica(){
         String resposta  = tipoGramatica();
@@ -310,7 +334,7 @@ B -> b|bB
                 if(g.toLowerCase().equals(g)){             
                     System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
                     jLabel8.setText(geradorAtual.toString());
-                    jTextArea1.append("Questão 5: Derivação: " + geradorAtual.toString());
+                    jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString());
                     derivar = false;
                 }else{
                     for(int y = 0; y < g.length(); y++){
@@ -398,6 +422,9 @@ B -> b|bB
         Tornar mais coeso os identificadores de gramática abaixo        */      
         if(glc > 0 && vazio == 0 && comp == 0){
             return ("Gramática livre de contexto");
+        }
+        if(glc > 0 && vazio != 0 && comp == 0){
+            return ("Gramática irrestrita");
         }else{
             if(gr > 0 && comp == 0){
                 return ("Gramática regular");
@@ -586,6 +613,7 @@ B -> b|bB
     private javax.swing.JButton Executar;
     private javax.swing.JTextField Nterminais;
     private javax.swing.JLabel aDef;
+    private javax.swing.JTextField derivacoes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -594,6 +622,7 @@ B -> b|bB
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
