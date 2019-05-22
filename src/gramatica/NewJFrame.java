@@ -21,12 +21,35 @@ public class NewJFrame extends javax.swing.JFrame {
 /*
 guardando aqui exemplos pra testar
     
+    //regular
 S -> a|aB|b
 A -> aS|aB
 B -> b|bA       
-
+    
+    //regular
+A -> aC|aB
+B -> b|bA
+C -> c|aA    
+    
+    //livre contexto
+A -> A|a
+B -> A|b|cC
+C -> c    
+    //livre contexto
 A -> A|aB
-B -> b|bB
+B -> b|bB    
+    
+    //irrestrita
+S -> abC|*
+bC -> bc|A
+A -> a|abc
+B -> b|bB   
+    
+    //sensivel ao contexto
+S -> abC
+bC -> bc|aA
+A -> a|abc
+B -> b|bB      
 */
     
     
@@ -55,14 +78,10 @@ B -> b|bB
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Executar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        aDef = new javax.swing.JLabel();
         terminais = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         producao = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
@@ -92,10 +111,6 @@ B -> b|bB
             }
         });
 
-        jLabel2.setText("Gramática a ser definida:");
-
-        aDef.setText("A definir...");
-
         terminais.setText("a,b");
 
         producao.setColumns(20);
@@ -105,17 +120,13 @@ B -> b|bB
 
         jLabel6.setText("obs: Sentença vazia: *");
 
-        jLabel7.setText("Derivação:");
-
-        jLabel8.setText("...");
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
         jLabel9.setText("Derivações");
 
-        derivacoes.setText("2");
+        derivacoes.setText("3");
         derivacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 derivacoesActionPerformed(evt);
@@ -132,10 +143,6 @@ B -> b|bB
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(aDef))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -156,11 +163,7 @@ B -> b|bB
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(derivacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
-                                .addComponent(Executar))
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel8)))
+                                .addComponent(Executar)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -194,15 +197,7 @@ B -> b|bB
                             .addComponent(Executar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(derivacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(aDef))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addGap(0, 126, Short.MAX_VALUE))
+                        .addGap(0, 203, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -219,8 +214,7 @@ B -> b|bB
         ladoEsquerdoProducao.clear();
         listaProdutores.clear();
         jTextArea1.setText("");
-        String gramatica = "G = ({"+ pegarNterminais() + "}, {" + pegarTerminais() + "}, P, S)";
-        aDef.setText(gramatica);
+        String gramatica = "G = ({"+ pegarNterminais() + "}, {" + pegarTerminais() + "}, P, S)";        
         jTextArea1.append("Questão 2: visualização da gramática formatada: \n" + gramatica + "\n\n");
         
         String producaoSep[]=producao.getText().split("\n");
@@ -258,7 +252,7 @@ B -> b|bB
             String resposta = tipoGramatica();
             //JOptionPane.showMessageDialog(null, resposta,"Tipo da Gramática", JOptionPane.INFORMATION_MESSAGE);
             jTextArea1.append("Questão 4: Tipo da gramática: " + resposta + "\n");
-            for(int k = 0; k <= Integer.parseInt(derivacoes.getText()); k++){
+            for(int k = 0; k <= Integer.parseInt(derivacoes.getText())-1; k++){
                 derivaGramatica(resposta);
             }
             
@@ -333,10 +327,8 @@ B -> b|bB
 
                 //se o gerador aleatorio for minusculo, a derivação termina
                 //se contiver maiuscula, percorre a string e retorna a letra maiucula
-                if(g.toLowerCase().equals(g)){             
-                    System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
-                    jLabel8.setText(geradorAtual.toString());
-                    jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString());
+                if(g.toLowerCase().equals(g)){                                 
+                    jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString().substring(0, geradorAtual.toString().length()-3)); //-3 para remover " ->"
                     derivar = false;
                 }else{
                     for(int y = 0; y < g.length(); y++){
@@ -380,9 +372,8 @@ B -> b|bB
                 //se o gerador aleatorio for minusculo, a derivação termina
                 //se contiver maiuscula, percorre a string e retorna a letra maiucula
                 if(g.toLowerCase().equals(g)){             
-                    System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
-                    jLabel8.setText(geradorAtual.toString());
-                    jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString());
+                    System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados                    
+                    jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString().substring(0, geradorAtual.toString().length()-3));
                     derivar = false;
                 }else{
                     aux = aux.concat(g);
@@ -512,20 +503,20 @@ B -> b|bB
             String matrizAutomato[][] = new String[vetorNaoTerminais.length+1][vetorTerminais.length+1];
             jTextArea1.append("\n\nQuestão 6: Reconhecer por autômato finito:\n");
 
-            for (int i = 0; i < matrizAutomato.length; i++) {
-                for (int j = 0; j < matrizAutomato.length; j++) {
+            for (int i = 0; i < vetorNaoTerminais.length+1; i++) {
+                for (int j = 0; j < vetorTerminais.length+1; j++) {
                     matrizAutomato[i][j] = "";
                 }
             }        
             //popula as linhas, coluna ZERO com os NÃO TERMINAIS
             int indiceVetores=0;
-            for (int i = 1; i < matrizAutomato.length; i++) {
+            for (int i = 1; i < vetorNaoTerminais.length+1; i++) {
                 matrizAutomato[i][0] = vetorNaoTerminais[indiceVetores];            
                 indiceVetores++;
             }
             indiceVetores=0;
             //popula as colunas, linha ZERO com os TERMINAIS
-            for (int i = 1; i < matrizAutomato.length; i++) {
+            for (int i = 1; i < vetorTerminais.length+1; i++) {
                 matrizAutomato[0][i] = vetorTerminais[indiceVetores];            
                 indiceVetores++;
             }     
@@ -564,8 +555,8 @@ B -> b|bB
             jTextArea1.append("\nTabela gerada:\n");
             System.out.println("TABELA GERADA");
 
-            for (int i = 0; i < matrizAutomato.length; i++) {            
-                for (int j = 0; j < matrizAutomato.length; j++) {
+            for (int i = 0; i < vetorNaoTerminais.length+1; i++) {            
+                for (int j = 0; j < vetorTerminais.length+1; j++) {
                     if (j==0){
                         if (matrizAutomato[i][j].equals("")){
                             System.out.print("| - |");
@@ -654,16 +645,12 @@ B -> b|bB
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Executar;
     private javax.swing.JTextField Nterminais;
-    private javax.swing.JLabel aDef;
     private javax.swing.JTextField derivacoes;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
