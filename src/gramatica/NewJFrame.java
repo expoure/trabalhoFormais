@@ -312,6 +312,9 @@ B -> b|bB
         String g = "";
         String terminal = "";
         String naoTerminal = "";
+        String le = "";
+        String aux = "";
+        int controlador = 0;
 
         produtorAtual = listaProdutores.get(0);
         //System.out.println(produtorAtual.getLetras());
@@ -353,7 +356,46 @@ B -> b|bB
                     
             }
         }else{
-            //derivar os dois primeiros tipos
+            
+            while(derivar){
+            
+                int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
+                g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
+                
+                System.out.println("gerador escolhido: "+g);
+
+                if(controlador == 0){//mudar a variavel empty
+                    geradorAtual = geradorAtual.concat(g + " -> ");
+                }else{
+                    geradorAtual = geradorAtual.concat(aux + g + " -> ");//AQUI ELE NAO VAI CONCATENAR APENAS O TERMINAL...
+                }
+                
+                
+                for(int l = 0; l < listaProdutores.size(); l++){
+                    if(g.contains(listaProdutores.get(l).getLetras().toString())){
+                        le = listaProdutores.get(l).getLetras().toString();
+                        System.out.println("le: " +le);
+                    }
+                }
+
+                //se o gerador aleatorio for minusculo, a derivação termina
+                //se contiver maiuscula, percorre a string e retorna a letra maiucula
+                if(g.toLowerCase().equals(g)){             
+                    System.out.println("derivação terminada: " + geradorAtual.toString()); //precisar concatenar os resultados
+                    jLabel8.setText(geradorAtual.toString());
+                    jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString());
+                    derivar = false;
+                }else{
+                    aux.concat(g);
+                    aux = aux.replaceFirst(g, "");
+                    //aux = g;
+                    System.out.println("aux    "+aux);
+                    produtorAtual = listaProdutores.get(indiceNT(le));
+                    System.out.println("indiceeee: "+indiceNT(le));
+                    
+                }
+                controlador++;    
+            }
         }
         
         return "";
