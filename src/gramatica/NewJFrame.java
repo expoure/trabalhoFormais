@@ -115,7 +115,7 @@ B -> b|bB
 
         jLabel9.setText("Derivações");
 
-        derivacoes.setText("0");
+        derivacoes.setText("2");
         derivacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 derivacoesActionPerformed(evt);
@@ -325,7 +325,6 @@ B -> b|bB
                 int x = r.nextInt(produtorAtual.getGeradores().size()); //escolhe indice aleatorio
                 g = produtorAtual.getGeradores().get(x).toString(); //pega o gerador aleatorio e guarda
                 System.out.println(g);
-
                 if(terminal.isEmpty()){
                     geradorAtual = geradorAtual.concat(g + " -> ");
                 }else{
@@ -386,10 +385,11 @@ B -> b|bB
                     jTextArea1.append("\nQuestão 5: Derivação: " + geradorAtual.toString());
                     derivar = false;
                 }else{
-                    aux.concat(g);
-                    aux = aux.replaceFirst(g, "");
-                    //aux = g;
-                    System.out.println("aux    "+aux);
+                    aux = aux.concat(g);
+                    System.out.println("aux conc: "+aux);
+                    aux = aux.replaceFirst(le, "");
+                    //aux.concat(g);
+                    System.out.println("aux replaced  "+aux);
                     produtorAtual = listaProdutores.get(indiceNT(le));
                     System.out.println("indiceeee: "+indiceNT(le));
                     
